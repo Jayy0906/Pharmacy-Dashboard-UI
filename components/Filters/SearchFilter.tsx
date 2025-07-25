@@ -1,15 +1,24 @@
-import React from "react";
+// components/Filters/SearchFilter.tsx
+import React from "react"; // Imports React
 
+/**
+ * SearchFilter component provides search and filter functionalities for a list of products.
+ * It includes a search input field and multiple dropdowns for various filter criteria.
+ */
 export default function SearchFilter() {
   return (
+    // Main section for the search and filter UI, with styling for background, rounding, padding, margin, and shadow.
     <section className="bg-white rounded-lg p-5 mb-6 shadow-sm">
-      {/* Search Input */}
+      {/* Search Input Form */}
       <form className="flex flex-col sm:flex-row sm:items-center gap-4">
         <div className="flex-1">
+          {/* SR-only label for accessibility */}
           <label className="sr-only" htmlFor="search">
             Search
           </label>
+          {/* Search input container with icon */}
           <div className="relative text-gray-400 focus-within:text-gray-600">
+            {/* Search icon */}
             <span className="absolute inset-y-0 left-3 flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -26,6 +35,7 @@ export default function SearchFilter() {
                 />
               </svg>
             </span>
+            {/* Search input field */}
             <input
               className="w-full border border-gray-300 rounded-md py-3 pl-10 pr-4 text-base font-medium placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-teal-600 bg-white text-gray-900"
               id="search"
@@ -34,10 +44,12 @@ export default function SearchFilter() {
             />
           </div>
         </div>
+        {/* Search Button */}
         <button
           className="bg-teal-600 hover:bg-teal-700 text-white font-semibold text-sm rounded-md px-6 py-3 flex items-center justify-center gap-2 min-w-[120px] sm:min-w-[160px] md:min-w-[200px] lg:min-w-[300px] cursor-pointer"
           type="submit"
         >
+          {/* Search icon for the button */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4"
@@ -56,10 +68,9 @@ export default function SearchFilter() {
         </button>
       </form>
 
-      {/* Filter Dropdowns */}
-
+      {/* Filter Dropdowns Section */}
       <form className="mt-4 grid grid-cols-1 sm:grid-cols-6 gap-3">
-        {/* Product Type */}
+        {/* Product Type Filter */}
         <select
           aria-label="Product Type"
           defaultValue=""
@@ -72,7 +83,7 @@ export default function SearchFilter() {
           <option value="type-4">Type 4</option>
         </select>
 
-        {/* Brand */}
+        {/* Brand Filter */}
         <select
           aria-label="Brand"
           defaultValue=""
@@ -86,7 +97,7 @@ export default function SearchFilter() {
           <option value="novartis">Novartis</option>
         </select>
 
-        {/* Product Group */}
+        {/* Product Group Filter */}
         <select
           aria-label="Product Group"
           defaultValue=""
@@ -100,7 +111,7 @@ export default function SearchFilter() {
           <option value="vitamins">Vitamins</option>
         </select>
 
-        {/* Location */}
+        {/* Location Filter */}
         <select
           aria-label="Location"
           defaultValue=""
@@ -114,7 +125,7 @@ export default function SearchFilter() {
           <option value="cold-storage">Cold Storage</option>
         </select>
 
-        {/* Status */}
+        {/* Status Filter */}
         <select
           aria-label="Status"
           defaultValue=""
@@ -127,7 +138,7 @@ export default function SearchFilter() {
           <option value="inactive">Inactive</option>
         </select>
 
-        {/* Age Restrictions */}
+        {/* Age Restrictions Filter */}
         <select
           aria-label="Age Restrictions"
           defaultValue=""

@@ -4,7 +4,7 @@ import { FaCheck } from "react-icons/fa";
 interface FormFooterProps {
   onSaveDraft: () => void;
   onSaveAdd: () => void;
-  isSubmitting: boolean; // 👈 NEW
+  isSubmitting: boolean;
 }
 
 const FormFooter: React.FC<FormFooterProps> = ({
@@ -13,7 +13,9 @@ const FormFooter: React.FC<FormFooterProps> = ({
   isSubmitting,
 }) => {
   return (
+    // Footer with Save Draft and Save + Add buttons
     <footer className="flex justify-end gap-3 mt-6 py-4 border-t border-[#E2E8F0]">
+      {/* Save as Draft button */}
       <button
         type="button"
         onClick={onSaveDraft}
@@ -23,11 +25,12 @@ const FormFooter: React.FC<FormFooterProps> = ({
         Save as Draft
       </button>
 
+      {/* Save and Add button (primary) */}
       <button
         type="button"
         onClick={onSaveAdd}
         disabled={isSubmitting}
-        className="bg-[#10B981] hover:bg-[#0f9e6e] text-white text-sm font-semibold rounded-md px-5 py-2.5 flex items-center gap-2 transition cursor-pointer disabled:opacity-50"
+        className="bg-teal-700 hover:bg-teal-600 text-white text-sm font-semibold rounded-md px-5 py-2.5 flex items-center gap-2 transition cursor-pointer disabled:opacity-50"
       >
         <FaCheck />
         {isSubmitting ? "Saving..." : "Save & Add Product"}

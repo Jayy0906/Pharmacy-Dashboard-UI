@@ -1,9 +1,21 @@
 "use client";
 
-import React from "react";
-import ProductCard from "../Cards/ProductCard";
-
+import React, { useState } from "react";
+import ProductCard from "../Cards/ProductCard"; // Imports the ProductCard component used for displaying individual product rows.
+import Pagination from "../Pagination/Pagination";
+/**
+ * InventoryTable Component
+ *
+ * Displays a table of products in the inventory.
+ * It includes a header with product count and a "Show" dropdown,
+ * the main table with product details, and a pagination footer.
+ */
 export default function InventoryTable() {
+  // Sample product data to be displayed in the table.
+  // The `as const` assertion ensures that the array and its objects are deeply immutable and their literal types are inferred.
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 2;
+
   const products = [
     {
       id: 1,
@@ -17,7 +29,7 @@ export default function InventoryTable() {
       expiry: "Dec 2025",
       supplier: "PharmaCorp Ltd",
       location: "Shelf A1",
-      stockStatus: "good",
+      stockStatus: "good", // Used for visual indication (e.g., green for good stock)
     },
     {
       id: 2,
@@ -31,7 +43,7 @@ export default function InventoryTable() {
       expiry: "Mar 2024",
       supplier: "MediSupply Co",
       location: "Shelf B2",
-      stockStatus: "warning",
+      stockStatus: "warning", // Used for visual indication (e.g., orange for low stock)
     },
     {
       id: 3,
@@ -45,21 +57,35 @@ export default function InventoryTable() {
       expiry: "Jan 2026",
       supplier: "GlobalPharma",
       location: "Cold Storage",
-      stockStatus: "critical",
+      stockStatus: "critical", // Used for visual indication (e.g., red for out of stock)
     },
+    // Add more products here...
   ] as const;
 
+  const totalItems = products.length;
+
+  // Paginated data
+  const paginatedProducts = products.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage,
+  );
+
   return (
+    // Main section container for the inventory table, with styling for background, shadow, and overflow.
     <section className="bg-white rounded-lg shadow-sm w-full overflow-hidden">
+      {/* Table Header Section */}
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-200 px-6 py-4">
+        {/* Products Count Title */}
         <h3 className="font-medium text-gray-700 text-lg">
-          Products (247 items)
+          Products ({totalItems} items)
         </h3>
         <div className="flex items-center gap-2 text-base font-medium mt-2 sm:mt-0">
           <span className="text-gray-700">Show:</span>
           <select
-            aria-label="Show number of items"
+            aria-label="Show number of items" // Accessibility label for the select element.
             className="border border-gray-200 rounded-md py-1 px-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-teal-600 bg-gray-100 cursor-pointer"
+            value={itemsPerPage}
+            disabled
           >
             <option>25</option>
             <option>50</option>
@@ -85,33 +111,21 @@ export default function InventoryTable() {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {products.map((product) => (
+            {paginatedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </tbody>
         </table>
       </div>
 
-      <footer className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-6 py-3 border-t border-gray-200 text-base font-medium ">
-        <div className="text-gray-500">Showing 1 to 25 of 247 results</div>
-        <nav className="inline-flex items-center gap-2 mt-2 sm:mt-0">
-          <button className="border border-gray-300 rounded px-3 py-1 text-sm font-semibold hover:bg-gray-100 cursor-pointer">
-            Previous
-          </button>
-          <button className="border border-teal-600 rounded px-3 py-1 text-sm font-semibold bg-teal-600 text-white cursor-pointer">
-            1
-          </button>
-          <button className="border border-gray-300 rounded px-3 py-1 text-sm font-semibold hover:bg-gray-100 cursor-pointer">
-            2
-          </button>
-          <button className="border border-gray-300 rounded px-3 py-1 text-sm font-semibold hover:bg-gray-100 cursor-pointer">
-            3
-          </button>
-          <button className="border border-gray-300 rounded px-3 py-1 text-sm font-semibold hover:bg-gray-100 cursor-pointer">
-            Next
-          </button>
-        </nav>
-      </footer>
+      {/* Pass props to Pagination */}
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+        itemLabel="inventory"
+      />
     </section>
   );
 }

@@ -1,3 +1,5 @@
+// app/inventory/page.tsx
+
 "use client";
 
 import InventoryHeader from "../../components/Header/InventoryHeader";

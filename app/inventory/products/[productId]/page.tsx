@@ -1,6 +1,8 @@
 "use client";
 
 import React, { use } from "react";
+
+// Importing UI sections for product detail view
 import ProductHeader from "@/components/products/ProductHeader";
 import GeneralInfoSection from "@/components/products/GeneralInfoSection";
 import PricingInfoSection from "@/components/products/PricingInfoSection";
@@ -10,14 +12,15 @@ import TransactionHistorySection from "@/components/products/TransactionHistoryS
 import WarehouseInfoSection from "@/components/products/WarehouseInfoSection";
 import ProductImagesSection from "@/components/products/ProductImagesSection";
 
+// Server component with `params` for dynamic route [productId]
 const ProductDetailsPage = ({
   params,
 }: {
-  params: Promise<{ productId: string }>;
+  params: Promise<{ productId: string }>; // Receiving the productId as a promise
 }) => {
-  const { productId } = use(params); // ✅ unwrap the Promise
+  const { productId } = use(params); // Unwrapping the promise using experimental `use` hook
 
-  // Mock product data based on productId
+  // Mock product data (ideally this would come from a real API)
   const product = {
     id: productId,
     name: "Paracetamol 500mg Tablets",
@@ -43,19 +46,22 @@ const ProductDetailsPage = ({
     stockStatus: "Healthy Stock",
   };
 
+  // Edit action handler (can be used to navigate to the edit form)
   const handleEdit = () => {
     console.log("Edit product clicked");
-    // Navigate to edit page
+    // TODO: Navigate to edit page
   };
 
+  // Delete action handler (can show confirmation modal)
   const handleDelete = () => {
     console.log("Delete product clicked");
-    // Confirm and delete
+    // TODO: Implement delete logic
   };
 
   return (
     <div className="bg-[#F8FAFC] min-h-screen">
       <div className="w-full mx-auto">
+        {/* Product title, description and edit/delete buttons */}
         <ProductHeader
           title="Product Details"
           description="View and update information for this medicine."
@@ -63,7 +69,9 @@ const ProductDetailsPage = ({
           onDelete={handleDelete}
         />
 
+        {/* Two-column layout (main content + sidebar) */}
         <div className="flex flex-col lg:flex-row gap-4 md:gap-6">
+          {/* Main product details section */}
           <div className="flex-1 space-y-4 md:space-y-6">
             <GeneralInfoSection product={product} />
             <PricingInfoSection product={product} />
@@ -72,6 +80,7 @@ const ProductDetailsPage = ({
             <TransactionHistorySection />
           </div>
 
+          {/* Sidebar: warehouse info and product images */}
           <aside className="w-full lg:w-[320px] space-y-4 md:space-y-6">
             <WarehouseInfoSection product={product} />
             <ProductImagesSection />

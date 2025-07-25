@@ -5,15 +5,18 @@ import { FaInfoCircle, FaPoundSign } from "react-icons/fa";
 import { TAX_RATES } from "../../lib/constants";
 
 const PricingInformation: React.FC = () => {
+  // Controlled state for cost and VAT
   const [costPrice, setCostPrice] = useState(0);
   const [vat, setVat] = useState(20);
 
+  // Auto-calculate selling price based on VAT
   const calculateSellingPrice = () => {
     return costPrice * (1 + vat / 100);
   };
 
   return (
     <div className="space-y-5">
+      {/* Cost Price and VAT fields */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
           id="costPrice"
@@ -38,6 +41,7 @@ const PricingInformation: React.FC = () => {
         />
       </div>
 
+      {/* Standard cost (manual) and auto-calculated selling price */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
           id="standardCost"
@@ -61,6 +65,7 @@ const PricingInformation: React.FC = () => {
         </div>
       </div>
 
+      {/* Tax rate dropdown */}
       <Select
         id="taxRate"
         label="Tax Rate"

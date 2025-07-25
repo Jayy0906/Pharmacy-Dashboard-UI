@@ -1,3 +1,4 @@
+// app/inventory/add-product/page.tsx
 "use client";
 
 import React, { useState } from "react";

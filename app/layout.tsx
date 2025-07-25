@@ -1,11 +1,13 @@
 // app/layout.tsx
-
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import LayoutShell from "../components/Layout/LayoutShell";
 import { SidebarProvider } from "../context/SidebarContext";
 import React from "react";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,10 +23,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <head>
+        {/* Add Font Awesome for icons */}
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+        />
+      </head>
+      <body className={`${inter.className} bg-gray-50`}>
         <SidebarProvider>
           <div className="min-h-screen">
-            {/* Always use LayoutShell */}
             <LayoutShell>{children}</LayoutShell>
           </div>
         </SidebarProvider>

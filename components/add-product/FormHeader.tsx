@@ -9,7 +9,7 @@ interface FormHeaderProps {
   description: string;
   onCancel: () => void;
   onSave: () => void;
-  isSubmitting: boolean; // 👈 NEW
+  isSubmitting: boolean;
 }
 
 const FormHeader: React.FC<FormHeaderProps> = ({
@@ -17,18 +17,20 @@ const FormHeader: React.FC<FormHeaderProps> = ({
   description,
   onCancel,
   onSave,
-  isSubmitting, // 👈 NEW
+  isSubmitting,
 }) => {
   const router = useRouter();
 
   return (
+    // Form top section with back button, title, description, and action buttons
     <header className="flex items-center justify-between mb-6">
+      {/* Back button and page title */}
       <div className="flex items-center space-x-3">
         <button
           type="button"
           onClick={() => {
             onCancel();
-            router.push("/inventory");
+            router.push("/inventory"); // Navigate back to inventory page
           }}
           className="text-[#475569] hover:text-[#1E293B] cursor-pointer transition"
         >
@@ -45,6 +47,7 @@ const FormHeader: React.FC<FormHeaderProps> = ({
         </div>
       </div>
 
+      {/* Right-side Save and Cancel buttons (hidden on small screens) */}
       <div className="hidden md:block flex space-x-3">
         <button
           type="button"
@@ -59,7 +62,7 @@ const FormHeader: React.FC<FormHeaderProps> = ({
           type="button"
           onClick={onSave}
           disabled={isSubmitting}
-          className="bg-[#10B981] hover:bg-[#0f9e6e] text-white text-sm font-semibold rounded-md px-5 py-2.5 transition cursor-pointer disabled:opacity-50"
+          className="bg-teal-700 hover:bg-teal-600 text-white text-sm font-semibold rounded-md px-5 py-2.5 transition cursor-pointer disabled:opacity-50"
         >
           {isSubmitting ? "Saving..." : "Save Product"}
         </button>

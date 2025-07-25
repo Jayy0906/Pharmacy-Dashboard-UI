@@ -7,6 +7,7 @@ import { WAREHOUSE_LOCATIONS } from "../../lib/constants";
 const WarehouseInformation: React.FC = () => {
   return (
     <div className="space-y-5">
+      {/* Initial stock and location dropdown */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
           id="initialStock"
@@ -24,6 +25,7 @@ const WarehouseInformation: React.FC = () => {
         />
       </div>
 
+      {/* Expiry date picker and barcode input */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
           id="expiryDate"

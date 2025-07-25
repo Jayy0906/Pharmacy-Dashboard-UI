@@ -1,7 +1,10 @@
+// components/Cards/ProductCard.tsx
+
 import React from "react";
 import StockBadge from "../Badges/StockBadge";
 import Link from "next/link";
 
+// Type definition for a product
 interface Product {
   id: number;
   name: string;
@@ -17,13 +20,9 @@ interface Product {
   stockStatus: "good" | "warning" | "critical";
 }
 
+// Component to display a single product row in a table format
 export default function ProductCard({ product }: { product: Product }) {
-  // const statusClasses = {
-  //   good: 'bg-green-100 text-green-900',
-  //   warning: 'bg-yellow-100 text-yellow-900',
-  //   critical: 'bg-red-100 text-red-900',
-  // };
-
+  // Map stock status to corresponding icon and styling
   const statusIcon = {
     good: (
       <div className="flex items-center justify-center w-10 h-10 rounded-md bg-blue-100 text-blue-600">
@@ -83,6 +82,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <tr className="hover:bg-gray-50">
+      {/* Product Name and Category with status icon */}
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
           {statusIcon[product.stockStatus]}
@@ -97,36 +97,48 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
       </td>
 
+      {/* SKU */}
       <td className="px-4 py-4 font-medium text-base text-gray-700">
         {product.sku}
       </td>
 
+      {/* Stock quantity with badge */}
       <td className="px-4 py-4">
         <StockBadge stock={product.stock} status={product.stockStatus} />
       </td>
 
+      {/* Allocated quantity */}
       <td className="px-6 py-4 font-medium text-gray-700">
         {product.allocated}
       </td>
 
+      {/* Cost Price */}
       <td className="px-6 py-4 font-medium text-gray-700">
         {product.costPrice}
       </td>
 
+      {/* Selling Price */}
       <td className="px-6 py-4 font-medium text-gray-700">
         {product.sellingPrice}
       </td>
 
+      {/* Expiry date with conditional style */}
       <td className="px-6 py-4 text-center text-base font-medium">
         <div
-          className={`inline-block rounded px-2 py-1 ${product.stockStatus === "warning" ? "bg-orange-100 text-orange-700" : "text-gray-700"}`}
+          className={`inline-block rounded px-2 py-1 ${
+            product.stockStatus === "warning"
+              ? "bg-orange-100 text-orange-700"
+              : "text-gray-700"
+          }`}
         >
           {product.expiry}
         </div>
       </td>
 
+      {/* Supplier name */}
       <td className="px-1 py-4 whitespace-nowrap">{product.supplier}</td>
 
+      {/* Storage location with different style for Cold Storage */}
       <td className="px-6 py-4">
         {product.location === "Cold Storage" ? (
           <span className="inline-flex flex-col items-center justify-center bg-blue-100 text-blue-700 text-xs rounded-md px-4 py-1 font-medium leading-tight text-center">
@@ -141,8 +153,10 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
       </td>
 
+      {/* Action buttons: View, Edit, Delete */}
       <td className="px-6 py-4">
         <div className="flex items-center gap-3 text-sm">
+          {/* View product link */}
           <Link href={`/inventory/products/${product.id}`}>
             <button
               aria-label="View product"
@@ -171,6 +185,7 @@ export default function ProductCard({ product }: { product: Product }) {
             </button>
           </Link>
 
+          {/* Edit product */}
           <button
             aria-label="Edit product"
             className="text-blue-600 hover:text-blue-700 cursor-pointer"
@@ -190,6 +205,8 @@ export default function ProductCard({ product }: { product: Product }) {
               />
             </svg>
           </button>
+
+          {/* Delete product */}
           <button
             aria-label="Delete product"
             className="text-red-600 hover:text-red-700 cursor-pointer"
